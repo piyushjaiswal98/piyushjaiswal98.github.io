@@ -136,74 +136,89 @@
             </div>
             
         </div>
-        <script type = "text/javascript" src = "information.js"></script>
         <script>
-            
-            var line = "", edu = "", work = "", community = "", extra = "";
-        
-            document.getElementById("name").innerHTML = information.name;
-            document.getElementById("designation").innerHTML = information.designation;
-            document.getElementById("phone").innerHTML = information.phone;
-            document.getElementById("email").innerHTML = information.email;
-            document.getElementById("linkedin").innerHTML = information.linkedin;
-            document.getElementById("objective").innerHTML = information.objective;
-            
-            
-            for(var i = 0; i < information.skill.length; i++)
-            {
-                line += information.skill[i].name + "<br><progress value = '" + information.skill[i].percent + "' max = '100'></progress><br><br>";
-            }
-            
-            document.getElementById("skill").innerHTML = line;
-            
-            
-            for(var i = 0; i < information.education.length; i++)
-            {
-                edu += "<div class = 'aling'><div class = 'content1'>" + information.education[i].institute_name + "</div><div class = 'date-align'> " + information.education[i].duration + "</div></div><div class = 'content'>" + information.education[i].branch + "</div><br><div class = 'content'> CGPA - " + information.education[i].grade + "</div>";
-            }
-            
-            document.getElementById("education").innerHTML = edu;
-            
-            
-            for(var i = 0; i < information.work_experience.length; i++)
-            {
-            
-                work += "<div class = 'aling'><div class = 'content1'>" + information.work_experience[i].company_name + "</div><div class = 'date-align'>" + information.work_experience[i].duration + "</div></div><div class = 'content'>" + information.work_experience[i].designation + "</div><ul>";
-                        
-                for(var j = 0; j < information.work_experience[i].comment.length; j++)
-                {
-                    work +="<li>" + information.work_experience[i].comment[j] + "</li>";
-                }
-                
-                work += "</ul>";
-            }
-            
-            document.getElementById("work_experience").innerHTML = work; 
-            
-            
-            for(var i = 0; i < information.community_involvement.length; i++)
-            {
-                community += "<div class = 'aling'><div class = 'content1'>" + information.community_involvement[i].role + "</div><div class = 'date-align'>" + information.community_involvement[i].duration + "</div></div><br><br>";
-            }
-            
-            document.getElementById("community_involvement").innerHTML = community;
 
-            
-            for(var i = 0; i < information.highlights.length; i++)
-            {
-                extra += "<div class = 'content'>" + information.highlights[i].topic + "</div><ul>";
-                
-                for(var j = 0; j < information.highlights[i].comment.length; j++)
-                {
-                    extra += "<li>" + information.highlights[i].comment[j] + "</li>";
-                }
-                
-            }
-            
-            extra += "</ul>";
-            
-            document.getElementById("highlights").innerHTML = extra;
-            
+	         var xhttp = new XMLHttpRequest();
+
+	          xhttp.onreadystatechange = function() {
+
+                  if (this.readyState == 4 && this.status == 200) {
+                    console.log(xhttp.responseText);
+	                   var information = JSON.parse(xhttp.responseText);
+
+                                 var line = "", edu = "", work = "", community = "", extra = "";
+
+                                 document.getElementById("name").innerHTML = information.name;
+                                 document.getElementById("designation").innerHTML = information.designation;
+                                 document.getElementById("phone").innerHTML = information.phone;
+                                 document.getElementById("email").innerHTML = information.email;
+                                 document.getElementById("linkedin").innerHTML = information.linkedin;
+                                 document.getElementById("objective").innerHTML = information.objective;
+
+
+                                 for(var i = 0; i < information.skill.length; i++)
+                                 {
+                                     line += information.skill[i].name + "<br><progress value = '" + information.skill[i].percent + "' max = '100'></progress><br><br>";
+                                 }
+
+                                 document.getElementById("skill").innerHTML = line;
+
+
+                                 for(var i = 0; i < information.education.length; i++)
+                                 {
+                                     edu += "<div class = 'aling'><div class = 'content1'>" + information.education[i].institute_name + "</div><div class = 'date-align'> " + information.education[i].duration + "</div></div><div class = 'content'>" + information.education[i].branch + "</div><br><div class = 'content'> CGPA - " + information.education[i].grade + "</div>";
+                                 }
+
+                                 document.getElementById("education").innerHTML = edu;
+
+
+                                 for(var i = 0; i < information.work_experience.length; i++)
+                                 {
+
+                                     work += "<div class = 'aling'><div class = 'content1'>" + information.work_experience[i].company_name + "</div><div class = 'date-align'>" + information.work_experience[i].duration + "</div></div><div class = 'content'>" + information.work_experience[i].designation + "</div><ul>";
+
+                                     for(var j = 0; j < information.work_experience[i].comment.length; j++)
+                                     {
+                                         work +="<li>" + information.work_experience[i].comment[j] + "</li>";
+                                     }
+
+                                     work += "</ul>";
+                                 }
+
+                                 document.getElementById("work_experience").innerHTML = work;
+
+
+                                 for(var i = 0; i < information.community_involvement.length; i++)
+                                 {
+                                     community += "<div class = 'aling'><div class = 'content1'>" + information.community_involvement[i].role + "</div><div class = 'date-align'>" + information.community_involvement[i].duration + "</div></div><br><br>";
+                                 }
+
+                                 document.getElementById("community_involvement").innerHTML = community;
+
+
+                                 for(var i = 0; i < information.highlights.length; i++)
+                                 {
+                                     extra += "<div class = 'content'>" + information.highlights[i].topic + "</div><ul>";
+
+                                     for(var j = 0; j < information.highlights[i].comment.length; j++)
+                                     {
+                                         extra += "<li>" + information.highlights[i].comment[j] + "</li>";
+                                     }
+
+                                 }
+
+                                 extra += "</ul>";
+
+                                 document.getElementById("highlights").innerHTML = extra;
+
+	                  }
+
+	          };
+
+	           xhttp.open("GET", "information.json", true);
+
+             xhttp.send();
+
         </script>
     
     </body>
